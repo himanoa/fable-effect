@@ -6,6 +6,7 @@
   "scripts": {
     "build": "dotnet fable"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
