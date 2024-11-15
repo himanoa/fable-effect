@@ -1,4 +1,4 @@
-namespace Fable.Control
+namespace Fable.Effect.Control
 
 type Binder = 
   static member inline Bind(
