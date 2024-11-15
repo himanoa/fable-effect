@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Include="src/Functor.fs" />
     <Compile Include="src/Applicative.fs" />
+    <Compile Include="src/Monad.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fable.Core" Version="4.3.0" />
