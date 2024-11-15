@@ -10,8 +10,10 @@
     <Compile Include="src/Control/Functor.fs" />
     <Compile Include="src/Control/Applicative.fs" />
     <Compile Include="src/Control/Monad.fs" />
+    <Compile Include="src/Data/Free.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fable.Core" Version="4.3.0" />
+    <PackageReference Include="Fable.Promise" Version="3.2.0" />
   </ItemGroup>
 </Project>
