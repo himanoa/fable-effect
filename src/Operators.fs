@@ -14,7 +14,9 @@ let inline map(mapping, source) = Functor.Invoke mapping source
 module Testing = 
   let bindOption() =
     let addOne = fun x -> Some (x + 1)
-    purify 12 >>= addOne
+    let addTwo = fun x -> Some (x + 2)
+    purify 12 >>= addOne >>= addTwo >>= addOne >>= addTwo >>= addOne >>= addTwo >>= addTwo
+
   let applyOption() = 
     let none: int option = None
     let some: int option = Some 1
