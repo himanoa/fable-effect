@@ -28,7 +28,10 @@ module Free =
     let rec exec(program: Free<'a>) = 
       match program with
       | PureValue x -> Fable.Core.JS.Constructors.Promise.resolve x
-      // NOTE: execの後のbox unboxで型検査を破壊してコンパイルを通している。外すと execがFree<'a> -> Promise<'a> なため、このパターンの戻り値が Promise<Promise<'a>>に推論されて壊れてしまう。
-      // JSのPromiseにはPromise<Promise<T>>を Promise<T>にflattenしてくれる機能があるため実用上無理なキャストをしても問題はない
+      (*
+        NOTE: execの後のbox unboxで型検査を破壊してコンパイルを通している。
+              外すと execがFree<'a> -> Promise<'a> なため、このパターンの戻り値が Promise<Promise<'a>>に推論されて壊れてしまう。
+              JSのPromiseにはPromise<Promise<T>>を Promise<T>にflattenしてくれる機能があるため実用上無理なキャストをしても問題はない
+      *)
       | Free promise -> promise.``then`` (fun next -> next |> unbox<Free<'a>> |> exec |> box |> unbox<'a>)
     exec program
