@@ -11,6 +11,7 @@
     <Compile Include="src/Control/Applicative.fs" />
     <Compile Include="src/Control/Monad.fs" />
     <Compile Include="src/Data/Free.fs" />
+    <Compile Include="src/Operators.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fable.Core" Version="4.3.0" />
