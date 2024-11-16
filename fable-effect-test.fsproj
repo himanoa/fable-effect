@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Fable.Effect.Test</PackageId>
+    <PackageVersion>0.0.1</PackageVersion>
+    <Version>0.0.1</Version>
+    <TargetFrameWork>net8.0</TargetFrameWork>
+     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src/Control/Functor.fs" />
+    <Compile Include="src/Control/Applicative.fs" />
+    <Compile Include="src/Control/Monad.fs" />
+    <Compile Include="src/Data/Free.fs" />
+    <Compile Include="src/Operators.fs" />
+    <Compile Include="src/Builder.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Fable.Core" Version="4.3.0" />
+    <PackageReference Include="Fable.Promise" Version="3.2.0" />
+  </ItemGroup>
+</Project>
