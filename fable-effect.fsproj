@@ -15,5 +15,10 @@
     <Compile Include="src/Operators.fs" />
     <Compile Include="src/Builder.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src/Control/Applicative.test.fs" />
+    <Compile Include="src/Control/Functor.test.fs" />
+    <Compile Include="src/Control/Monad.test.fs" />
+  </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

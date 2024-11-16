@@ -31,10 +31,3 @@ type Binder =
     ) =
       ((^M or ^I or ^F or ^R) : (static member Bind: _ * _ * _ -> _) value, fn, mthd)
     call (Unchecked.defaultof<Binder>, value, fn, Unchecked.defaultof<'c>)
-
-module Testing = 
-  let a(): int list =
-    let b = [1;2;3]
-    let c = fun x -> [x]
-    Binder.Invoke b c 
-

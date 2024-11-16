@@ -68,26 +68,3 @@ type Purifiable =
     ): 'b =
       ((^M or ^R) : (static member Pure: _ * _ * _  -> _) value, _output, mthd)
     call (Unchecked.defaultof<Purifiable>, value, Unchecked.defaultof<'b>)
-
-module Testing = 
-  let a() =
-    let fooAdd: List<int -> int> = [(fun x -> x + 1)]
-    let foo: List<int> = [12]
-
-    foo |> Appliable.Invoke fooAdd
-
-  let p(): list<int> =
-    let foo: int  = 12
-    Purifiable.Invoke foo
-
-  let p_r(): Result<int, int> =
-    let foo: int  = 12
-    Purifiable.Invoke foo
-
-  let p_o(): Option<int> =
-    let foo: int  = 12
-    let fooOpt: Option<int> = Purifiable.Invoke foo
-    let x = Functor.Invoke (fun a -> a + 1) fooOpt
-    if x.IsNone then
-      printfn "None!"
-    fooOpt
