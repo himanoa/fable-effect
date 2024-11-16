@@ -20,13 +20,10 @@ describe "Free Monad" <| fun () ->
 
   describe "Free" <| fun () ->
     it "creates a Free from a resolved promise" <| fun () -> promise {
-      let promise = Fable.Core.JS.Constructors.Promise.resolve (box 42)
+      let promise = Fable.Core.JS.Constructors.Promise.resolve (purify 42)
       let free = Free.Free promise
-      match free with
-      | Free t ->
-          let! resolved = t |> unbox<Promise<obj>>
-          Expect.equal (resolved |> unbox<int>) 42
-      | _ -> failwith "Expected Free"
+      let! result = Free.run free
+      Expect.equal result 42
     }
 
   describe "#Map" <| fun () ->
@@ -39,14 +36,11 @@ describe "Free Monad" <| fun () ->
     }
 
     it "maps a function over a Free" <| fun () -> promise {
-      let promise = Fable.Core.JS.Constructors.Promise.resolve (box 42)
+      let promise = Fable.Core.JS.Constructors.Promise.resolve (purify 42)
       let free = Free.Free promise
       let mapped = Functor.Invoke (fun x -> x * 2) free
-      match mapped with
-      | Free t ->
-          let! resolved = t |> unbox<Promise<obj>>
-          Expect.equal (resolved |> unbox<int>) 84
-      | _ -> failwith "Expected Free"
+      let! result = Free.run mapped
+      Expect.equal result 84
     }
 
   describe "#Bind" <| fun () ->
@@ -59,7 +53,7 @@ describe "Free Monad" <| fun () ->
     }
 
     it "binds a function to a Free" <| fun () -> promise {
-      let promise = Fable.Core.JS.Constructors.Promise.resolve (box 42)
+      let promise = Fable.Core.JS.Constructors.Promise.resolve (purify 42)
       let free = Free.Free promise
       let bound = Binder.Invoke free (fun x -> Free.Pure(x * 2))
       let! result = Free.run bound
@@ -74,14 +68,14 @@ describe "Free Monad" <| fun () ->
     }
 
     it "runs a Free with a resolved promise" <| fun () -> promise {
-      let promise = Fable.Core.JS.Constructors.Promise.resolve (box (Free.Pure(42)))
+      let promise = Fable.Core.JS.Constructors.Promise.resolve (purify 42)
       let free = Free.Free promise
       let! result = Free.run free
       Expect.equal result 42
     }
 
     it "runs a nested Free" <| fun () -> promise {
-      let promise = Fable.Core.JS.Constructors.Promise.resolve (box (Free.Free(Fable.Core.JS.Constructors.Promise.resolve (box (Free.Pure(42))))))
+      let promise = Fable.Core.JS.Constructors.Promise.resolve (Free.Free(Fable.Core.JS.Constructors.Promise.resolve (Free.Pure(42))))
       let free = Free.Free promise
       let! result = Free.run free
       Expect.equal result 42
