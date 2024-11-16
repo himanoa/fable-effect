@@ -19,6 +19,7 @@
     <Compile Include="src/Control/Applicative.test.fs" />
     <Compile Include="src/Control/Functor.test.fs" />
     <Compile Include="src/Control/Monad.test.fs" />
+    <Compile Include="src/Data/Free.test.fs" />
   </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
