@@ -1,14 +1,10 @@
 namespace Fable.Effect.Control
 
 type Binder =
-  static member inline Bind
-    (value: 'a list, fn: 'a -> 'b list, [<OptionalArgument>] _mthd: Binder)
-    : 'b list =
+  static member inline Bind(value: 'a list, fn: 'a -> 'b list, [<OptionalArgument>] _mthd: Binder) : 'b list =
     List.collect fn value
 
-  static member inline Bind
-    (value: 'a option, fn: 'a -> 'b option, [<OptionalArgument>] _mthd: Binder)
-    : 'b option =
+  static member inline Bind(value: 'a option, fn: 'a -> 'b option, [<OptionalArgument>] _mthd: Binder) : 'b option =
     Option.bind fn value
 
   static member inline Bind

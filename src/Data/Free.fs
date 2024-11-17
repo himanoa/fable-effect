@@ -7,13 +7,10 @@ type Free<'f, 'r, 'a when 'f :> HKT> =
   | PureValue of 'a
   | Free of App<'f, 'r> * ('r -> Free<'f, 'r, 'a>)
 
-  static member Pure
-    (x: 'a, [<OptionalArgument>] _output: Free<'f, 'r, 'a>, [<OptionalArgument>] _mthd: Purifiable) =
+  static member Pure(x: 'a, [<OptionalArgument>] _output: Free<'f, 'r, 'a>, [<OptionalArgument>] _mthd: Purifiable) =
     PureValue x
 
-  static member Map
-    (source: Free<'f, 'r, 'a>, mapping: 'a -> 'b, [<OptionalArgument>] _mthd: Functor)
-    : Free<'f, 'r, 'b> =
+  static member Map(source: Free<'f, 'r, 'a>, mapping: 'a -> 'b, [<OptionalArgument>] _mthd: Functor) : Free<'f, 'r, 'b> =
     let rec map (free: Free<'f, 'r, 'a>) : Free<'f, 'r, 'b> =
       match free with
       | PureValue s -> PureValue(mapping s)
@@ -22,12 +19,8 @@ type Free<'f, 'r, 'a when 'f :> HKT> =
     map source
 
   static member Bind
-    (value: Free<'f, 'r, 'a>, fn: 'a -> Free<'f, 'r, 'b>, [<OptionalArgument>] _mthd: Binder) : Free<
-                                                                                                  'f,
-                                                                                                  'r,
-                                                                                                  'b
-                                                                                                 >
-    =
+    (value: Free<'f, 'r, 'a>, fn: 'a -> Free<'f, 'r, 'b>, [<OptionalArgument>] _mthd: Binder)
+    : Free<'f, 'r, 'b> =
     let rec bind (free: Free<'f, 'r, 'a>) : Free<'f, 'r, 'b> =
       match free with
       | PureValue x -> fn x

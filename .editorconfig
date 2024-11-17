@@ -1,6 +1,6 @@
 [*.fs]
 indent_size = 2
-max_line_length = 100
+max_line_length = 122
 insert_final_newline = true
 fsharp_multiline_bracket_style = stroustrup
 fsharp_multi_line_lambda_closing_newline = true
