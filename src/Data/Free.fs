@@ -38,28 +38,19 @@ module Free =
     | PureValue x -> onPureValue x
     | Free (fx, k) ->  onFree fx k
 
+  let rec run (program: Free<'f, 'a>): 'a = 
+    let rec step (fx: 'f) (k: unit -> Free<'f, 'a>): Trampoline<'a> = 
+      Continue(fun () -> foldT Finish step (k()))
+    Trampoline.run (foldT Finish step program)
 
-(*
-module Testing = 
-  type Effect<'a> =
-    | Log of string * (unit -> 'a) // ログ出力
-
-  let log (message: string) =
-    let effect = Effect.Log(message, fun () -> ())
-    Free.liftF(effect)
-
-  let rec interpret (program: Free<Effect<'a>, 'a>): Fable.Core.JS.Promise<'a> = promise {
-    match program with
-    | PureValue x -> return x
-    | Free prom ->
-      let! inner = prom
-      match inner with
-      | PureValue x -> 
-        return x
-      | Effect.Log (message, next) ->
-        printfn "Log: %s" message
-        return! interpret (next ())
-      | Free _ as next ->
-        return! interpret next
-  }
-*)
+  let makeInterpreter (handler: 'fx -> Trampoline<unit>) (program: Free<'fx, 'a>): Free<'g, 'a> =
+    let rec interpret (program: Free<'fx, 'a>): Trampoline<Free<'g, 'a>> =
+      match program with
+      | PureValue x -> Finish(PureValue x)
+      | Free(fx, k) -> 
+        Continue(fun () ->
+          let trampoline  = handler fx
+          let fn = fun next -> interpret (k next)
+          Binder.Invoke trampoline fn
+        )
+    Trampoline.run (interpret program)
