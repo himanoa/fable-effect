@@ -11,10 +11,12 @@
     <Compile Include="src/Control/Functor.fs" />
     <Compile Include="src/Control/Applicative.fs" />
     <Compile Include="src/Control/Monad.fs" />
+    <Compile Include="src/Data/HKT.fs" />
     <Compile Include="src/Data/Trampoline.fs" />
     <Compile Include="src/Data/Free.fs" />
     <Compile Include="src/Operators.fs" />
     <Compile Include="src/Builder.fs" />
+    <Compile Include="src/Data/Async.fs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src/Control/Applicative.test.fs" />
