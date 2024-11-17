@@ -1,2 +1,2 @@
 #/usr/bin/env bash
-find src/ -type f -name "*.fs" -not -path "*obj*" | dotnet fantomas 
+dotnet fantomas  ./src/**/*.fs
