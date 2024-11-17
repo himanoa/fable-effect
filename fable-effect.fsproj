@@ -14,6 +14,7 @@
     <Compile Include="src/Data/HKT.fs" />
     <Compile Include="src/Data/Trampoline.fs" />
     <Compile Include="src/Data/Free.fs" />
+    <Compile Include="src/Data/State.fs" />
     <Compile Include="src/Operators.fs" />
     <Compile Include="src/Builder.fs" />
     <Compile Include="src/Data/Async.fs" />
@@ -25,6 +26,7 @@
     <Compile Include="src/Data/Trampoline.test.fs" />
     <Compile Include="src/Data/Free.test.fs" />
     <Compile Include="src/Data/Async.test.fs" />
+    <Compile Include="src/Data/State.test.fs" />
   </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
