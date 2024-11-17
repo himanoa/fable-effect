@@ -33,14 +33,3 @@ module Async =
               let! finalResult = runAsync (k result)
               return finalResult
     }
-
-
-module Testing = 
-  let test() =
-    let program = monad {
-      let! foo = Async.fromPromise(Constructors.Promise.resolve 1)
-      return foo
-    }
-
-    let result = Async.runAsync program
-    result.``then`` (fun r -> console.log r)

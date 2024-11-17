@@ -24,6 +24,7 @@
     <Compile Include="src/Control/Monad.test.fs" />
     <Compile Include="src/Data/Trampoline.test.fs" />
     <Compile Include="src/Data/Free.test.fs" />
+    <Compile Include="src/Data/Async.test.fs" />
   </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

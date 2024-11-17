@@ -3,7 +3,6 @@ open Fable.Effect.Data
 open Expect
 open WebTestRunner
 open Fable.Effect.Control
-open Fable.Effect.Builder
 open Fable.Effect.Operators
 
 // テスト用のエフェクト定義
