@@ -1,13 +1,11 @@
 namespace Fable.Effect.Data
 
-open Fable.Core.JS
 open Fable.Effect.Control
-
 
 [<NoComparison>]
 type Free<'f, 'a> = 
   | PureValue of 'a
-  | Free of Promise<Free<'f, 'a>>
+  | Free of 'f * (unit -> Free<'f, 'a>)
   static member Pure (
     x: 'a,
     [<OptionalArgument>] _output: Free<'f, 'a>,
@@ -15,65 +13,53 @@ type Free<'f, 'a> =
   ) =
     PureValue x
   static member Map (source: Free<'f, 'a>, mapping: 'a -> 'b, [<OptionalArgument>] _mthd: Functor): Free<'f, 'b> = 
-    let rec map(mapping: 'a -> 'b) (source: Free<'f, 'a>) : Free<'f, 'b> =  
-      match source with
-      | PureValue s ->
-        PureValue (mapping s)
-      | Free t -> 
-        let maped = t.``then`` (fun x ->
-          map mapping x
-        )
-        Free.Free(maped)
-    map mapping source
-  // static member Bind (value: Free<'f, 'a>, fn: 'a -> Free<'f, 'b>, [<OptionalArgument>] _mthd: Binder): Free<'f, 'b> = 
-  //   match value with
-  //   | PureValue a -> fn a
-  //   | Free t ->
-  //     (t |> unbox<Promise<obj>>).``then`` (fun x -> x |> unbox<'a> |> fn) |> unbox |> Free.Free
+    let rec map (free: Free<'f, 'a>): Free<'f, 'b> = 
+      match free with
+      | PureValue s -> PureValue(mapping s)
+      | Free (fx, k) ->  Free(fx, fun () -> map (k()))
+    map source
+
   static member Bind (value: Free<'f, 'a>, fn: 'a -> Free<'f, 'b>, [<OptionalArgument>] _mthd: Binder): Free<'f, 'b> = 
-    let rec bind (f: 'a -> Free<'f, 'b>) (value: Free<'f, 'a>): Free<'f, 'b> = 
-      match value with
-      | PureValue s -> f s
-      | Free t -> 
-        let binded = t.``then`` (fun x ->
-          bind fn x
-        )
-        Free.Free binded
-    bind fn value
+    let rec bind(free: Free<'f,'a>): Trampoline<Free<'f, 'b>> =
+      match free with
+      | PureValue x -> Finish(fn x)
+      | Free(fx, k) -> Continue(fun () ->
+        let binded = bind (k())
+        Functor.Invoke (fun next -> Free(fx, fun () -> next)) binded
+      )
+    Trampoline.run (bind value)
+    
 
 module Free = 
-  let liftF(value: 'f): Free<'f, 'a> = Free.Free(Fable.Core.JS.Constructors.Promise.resolve (Free.Free value))
+  let liftF(value: 'f): Free<'f, unit> = Free(value, fun () ->  PureValue ())
 
-  let rec run(program: Free<'f, 'a>): Fable.Core.JS.Promise<'a> = 
-    let rec exec(program: Free<'f, 'a>) = 
-      match program with
-      | Free.PureValue x -> Fable.Core.JS.Constructors.Promise.resolve x
-      (*
-        NOTE: execの後のbox unboxで型検査を破壊してコンパイルを通している。
-              外すと execがFree<'a> -> Promise<'a> なため、このパターンの戻り値が Promise<Promise<'a>>に推論されて壊れてしまう。
-              JSのPromiseにはPromise<Promise<T>>を Promise<T>にflattenしてくれる機能があるため実用上無理なキャストをしても問題はない
-      *)
-      | Free.Free promise -> (promise |> unbox<Promise<obj>>).``then`` (fun next -> next |> unbox<Free<'f, 'a>> |> exec |> box |> unbox<'a>)
-    exec program
+  let rec foldT (onPureValue: 'a -> Trampoline<'r>) (onFree: 'f -> (unit -> Free<'f, 'a>) -> Trampoline<'r>) (program: Free<'f, 'a>): Trampoline<'r>  = 
+    match program with
+    | PureValue x -> onPureValue x
+    | Free (fx, k) ->  onFree fx k
 
-// module Testing = 
-//   type Effect<'a> =
-//     | Log of string * (unit -> 'a) // ログ出力
-// 
-//   type EffectF<'a> = Free<Effect<'a>, 'a>
-// 
-//   let log (message: string): EffectF<unit> =
-//     let effect = Effect.Log(message, fun () -> ())
-//     Free.liftF(effect)
-// 
-//   let rec interpret (program: Free<Effect<'a>, 'a>): Fable.Core.JS.Promise<'a> =
-//     match program with
-//     | PureValue x -> Fable.Core.JS.Constructors.Promise.resolve x
-//     | Free pr -> promise {
-//       let! effect = pr.``then`` unbox<EffectF<'a>>
-//       match effect with
-//       | Log (message, next) ->
-//         printfn "Log: %s" message
-//         return! interpret (next ())
-//     }
 
+(*
+module Testing = 
+  type Effect<'a> =
+    | Log of string * (unit -> 'a) // ログ出力
+
+  let log (message: string) =
+    let effect = Effect.Log(message, fun () -> ())
+    Free.liftF(effect)
+
+  let rec interpret (program: Free<Effect<'a>, 'a>): Fable.Core.JS.Promise<'a> = promise {
+    match program with
+    | PureValue x -> return x
+    | Free prom ->
+      let! inner = prom
+      match inner with
+      | PureValue x -> 
+        return x
+      | Effect.Log (message, next) ->
+        printfn "Log: %s" message
+        return! interpret (next ())
+      | Free _ as next ->
+        return! interpret next
+  }
+*)
