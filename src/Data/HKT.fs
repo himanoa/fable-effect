@@ -17,12 +17,14 @@ and TCons<'T1, 'T2, 'T3, 'T4> = TCons<TCons<'T1, 'T2, 'T3>, 'T4>
 module HKT =
   let inline pack
     (value: 'Fa)
-    : App<'F, 'a> when 'F: (static member Assign: App<'F, 'a> * 'Fa -> unit) =
+    : App<'F, 'a> when 'F: (static member Assign: App<'F, 'a> * 'Fa -> unit)
+    =
     App value
 
   let inline unpack
     (App value: App<'F, 'a>)
-    : 'Fa when 'F: (static member Assign: App<'F, 'a> * 'Fa -> unit) =
+    : 'Fa when 'F: (static member Assign: App<'F, 'a> * 'Fa -> unit)
+    =
     value :?> _
 
   // active pattern variant useful for method definitions

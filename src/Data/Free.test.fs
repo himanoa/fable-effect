@@ -25,7 +25,7 @@ let count n =
 let log msg =
   Free.liftF (TestEffect.wrap (Log(msg, id)))
 
-describe "Free Monad"
+describe "Free Monad" 
 <| fun () ->
   describe "PureValue"
   <| fun () ->
