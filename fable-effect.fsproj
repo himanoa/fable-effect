@@ -4,8 +4,11 @@
     <PackageId>Fable.Effect</PackageId>
     <PackageVersion>0.0.1</PackageVersion>
     <Version>0.0.1</Version>
-    <TargetFrameWork>net8.0</TargetFrameWork>
+    <TargetFrameWork>netstandard2.0</TargetFrameWork>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Authors>himanoa</Authors>
+    <Description>Monad library targeting Fable's JavaScript"</Description>
+    <RepositoryUrl>https://github.com/himanoa/fable-effect</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="src/Control/Functor.fs" />
