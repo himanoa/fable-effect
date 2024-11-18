@@ -4,13 +4,18 @@
     <PackageId>Himanoa.Fable.Effect</PackageId>
     <PackageVersion>0.0.3</PackageVersion>
     <Version>0.0.3</Version>
-    <TargetFrameWork>netstandard2.0</TargetFrameWork>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>himanoa</Authors>
     <Description>Monad library targeting Fable's JavaScript"</Description>
     <RepositoryUrl>https://github.com/himanoa/fable-effect</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/himanoa/fable-effect</PackageProjectUrl>
+    <PackageTags>fsharp;fable;monad;functional-programming</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
     <Compile Include="src/Control/Functor.fs" />
     <Compile Include="src/Control/Applicative.fs" />
     <Compile Include="src/Control/Monad.fs" />
@@ -22,7 +27,7 @@
     <Compile Include="src/Builder.fs" />
     <Compile Include="src/Data/Async.fs" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <Compile Include="src/Control/Applicative.test.fs" />
     <Compile Include="src/Control/Functor.test.fs" />
     <Compile Include="src/Control/Monad.test.fs" />
