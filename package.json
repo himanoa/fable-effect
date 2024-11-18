@@ -6,7 +6,7 @@
   "scripts": {
     "build": "dotnet fable",
     "test": "dotnet fable && vitest run src/**/*.test.fs.js",
-    "bump": "changeset version",
+    "bump": "changeset version && dotnet fsi ./scripts/SyncFsProjVersion.fsx",
     "changeset": "changeset"
   },
   "type": "module",

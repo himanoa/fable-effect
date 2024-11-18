@@ -1,0 +1,29 @@
+name: Release
+
+on: [ workflow_dispatch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'pnpm'
+    - name: Restore npm dependencies
+      run: pnpm install
+    - name: Restore dependencies
+      run: dotnet tool restore
+    - name: Restore paket dependencies
+      run: dotnet paket restore
+    - name: Bump
+      run: pnpm run bump
+    - run: git push
