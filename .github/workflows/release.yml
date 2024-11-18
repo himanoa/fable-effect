@@ -26,5 +26,4 @@ jobs:
       run: dotnet paket restore
     - name: Bump
       run: pnpm run bump
-    - run:
-      git push
+    - run: git push
