@@ -1,0 +1,11 @@
+{
+  "projectStructure": {
+    "include": ["**/*"],
+    "exclude": ["node_modules/**", "dumprepo.json", "**/*.js", "fable_modules/**", "obj/**", "bin/**"]
+  },
+  "textFiles": {
+    "include": ["**/*"],
+    "exclude": ["node_modules/**", "dumprepo.json", "*.svg", "package-lock.json", "**/*.js", "fable_modules/**", "obj/**", "bin/**"]
+  },
+  "dot": false
+}

@@ -7,7 +7,8 @@
     "build": "dotnet fable",
     "test": "dotnet fable && vitest run src/**/*.test.fs.js",
     "bump": "changeset version && dotnet fsi ./scripts/SyncFsProjVersion.fsx",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "dump": "dumprepo"
   },
   "type": "module",
   "keywords": [],
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@changesets/cli": "2.27.9",
     "@web/test-runner": "0.19.0",
+    "dumprepo": "1.0.0",
     "vitest": "2.1.5"
   }
 }
