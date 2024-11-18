@@ -38,3 +38,4 @@ jobs:
         git commit -m "Release v${{env.VERSION}}"
     - run: git tag -a v${{env.VERSION}} -m "See. [CHANGELOG.md](https://github.com/himanoa/fable-effect/blob/main/CHANGELOG.md)"
     - run: git push --tags
+    - run: git push origin main
