@@ -28,4 +28,10 @@ jobs:
       run: pnpm run bump
     - run: git status
     - run: git --no-pager log
+    - name: Get version
+      id: package-version
+      run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+    - run: git add .
+    - run: git commit -m "Release v${{env.VERSION}}"
+    - run: git tag -a v${{env.VERSION}} -m "See. [CHANGELOG.md](https://github.com/himanoa/fable-effect/blob/main/CHANGELOG.md)"
     - run: git push --tags
