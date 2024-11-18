@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "dotnet fable",
-    "test": "dotnet fable && vitest run src/**/*.test.fs.js"
+    "test": "dotnet fable && vitest run src/**/*.test.fs.js",
+    "bump": "changeset"
   },
   "type": "module",
   "keywords": [],
