@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "dotnet fable",
-    "test": "dotnet fable && vitest run src/**/*.test.fs.js",
+    "test": "dotnet fable -c Debug && vitest run src/**/*.test.fs.js",
     "bump": "changeset version && dotnet fsi ./scripts/SyncFsProjVersion.fsx",
     "changeset": "changeset",
     "dump": "dumprepo > .git/dumped.txt"
@@ -13,7 +13,7 @@
   "type": "module",
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee",
   "devDependencies": {
     "@changesets/cli": "2.27.9",
