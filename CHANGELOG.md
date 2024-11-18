@@ -1,4 +1,4 @@
-# fable-control
+# himanoa-fable-effect
 
 ## 0.0.3
 

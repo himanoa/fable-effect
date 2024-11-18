@@ -1,5 +1,5 @@
 {
-  "name": "fable-control",
+  "name": "himanoa-fable-effect",
   "version": "0.0.3",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "test": "dotnet fable && vitest run src/**/*.test.fs.js",
     "bump": "changeset version && dotnet fsi ./scripts/SyncFsProjVersion.fsx",
     "changeset": "changeset",
-    "dump": "dumprepo"
+    "dump": "dumprepo > .git/dumped.txt"
   },
   "type": "module",
   "keywords": [],
