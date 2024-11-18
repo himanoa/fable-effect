@@ -1,4 +1,4 @@
-namespace Fable.Effect.Data
+namespace Himanoa.Fable.Effect.Data
 
 type State<'s, 'r> =
   | Get of ('s -> 'r)

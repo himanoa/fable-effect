@@ -1,6 +1,6 @@
-module Fable.Effect.Builder
+module Himanoa.Fable.Effect.Builder
 
-open Fable.Effect.Operators
+open Himanoa.Fable.Effect.Operators
 
 type MonadBuilder() = 
   member inline _.Return(value) = purify value

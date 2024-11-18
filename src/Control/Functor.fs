@@ -1,4 +1,4 @@
-namespace Fable.Effect.Control
+namespace Himanoa.Fable.Effect.Control
 
 type Functor =
   static member Map(source: 'R -> 'T, mapping: 'T -> 'U, [<OptionalArgument>] _mthd: Functor) = source >> mapping

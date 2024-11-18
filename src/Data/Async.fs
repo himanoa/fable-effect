@@ -1,7 +1,7 @@
-namespace Fable.Effect.Data.Async
+namespace Himanoa.Fable.Effect.Data.Async
 
-open Fable.Effect.Data
-open Fable.Effect.Builder
+open Himanoa.Fable.Effect.Data
+open Himanoa.Fable.Effect.Builder
 open Fable.Core.JS
 
 type AsyncAction<'a> = RunPromise of Promise<'a>

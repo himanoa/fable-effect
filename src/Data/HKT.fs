@@ -1,4 +1,4 @@
-namespace Fable.Effect.Data
+namespace Himanoa.Fable.Effect.Data
 
 type HKT = interface end
 

@@ -1,6 +1,6 @@
-namespace Fable.Effect.Data
+namespace Himanoa.Fable.Effect.Data
 
-open Fable.Effect.Control
+open Himanoa.Fable.Effect.Control
 
 type Trampoline<'a> =
   | Finish of 'a

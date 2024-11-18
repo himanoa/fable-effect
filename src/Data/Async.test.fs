@@ -1,10 +1,10 @@
-module Fable.Effect.Test.Data.Async
+module Himanoa.Fable.Effect.Test.Data.Async
 
 open Expect
 open Fable.Core.JS
 open WebTestRunner
-open Fable.Effect.Data.Async
-open Fable.Effect.Builder
+open Himanoa.Fable.Effect.Data.Async
+open Himanoa.Fable.Effect.Builder
 
 describe "Async"
 <| fun () ->

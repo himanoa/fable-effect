@@ -1,10 +1,10 @@
-module Fable.Effect.Test.Data.FreeMonad
+module Himanoa.Fable.Effect.Test.Data.FreeMonad
 
-open Fable.Effect.Data
+open Himanoa.Fable.Effect.Data
 open Expect
 open WebTestRunner
-open Fable.Effect.Control
-open Fable.Effect.Operators
+open Himanoa.Fable.Effect.Control
+open Himanoa.Fable.Effect.Operators
 
 // テスト用のエフェクト定義
 type TestEffect<'a> =

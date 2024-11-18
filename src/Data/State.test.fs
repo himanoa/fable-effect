@@ -1,9 +1,9 @@
-module Fable.Effect.Test.Data.State
+module Himanoa.Fable.Effect.Test.Data.State
 
-open Fable.Effect.Data
+open Himanoa.Fable.Effect.Data
 open Expect
 open WebTestRunner
-open Fable.Effect.Builder
+open Himanoa.Fable.Effect.Builder
 
 module Testing =
   let simpleGetProgram<'s> () =

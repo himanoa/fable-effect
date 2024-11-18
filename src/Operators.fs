@@ -1,6 +1,6 @@
-module Fable.Effect.Operators
+module Himanoa.Fable.Effect.Operators
 
-open Fable.Effect.Control
+open Himanoa.Fable.Effect.Control
 
 let inline (>>=) (value: 'a) (fn: 'b): 'c =  Binder.Invoke value fn
 let inline (=<<) (fn: 'b) (value: 'a): 'c =  Binder.Invoke value fn

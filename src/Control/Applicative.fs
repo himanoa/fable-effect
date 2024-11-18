@@ -1,4 +1,4 @@
-namespace Fable.Effect.Control
+namespace Himanoa.Fable.Effect.Control
 
 
 type Appliable =

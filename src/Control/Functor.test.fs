@@ -1,6 +1,6 @@
-module Fable.Effect.Test.Control.Functor
+module Himanoa.Fable.Effect.Test.Control.Functor
 
-open Fable.Effect.Control
+open Himanoa.Fable.Effect.Control
 open Expect
 open WebTestRunner
 

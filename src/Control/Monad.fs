@@ -1,4 +1,4 @@
-namespace Fable.Effect.Control
+namespace Himanoa.Fable.Effect.Control
 
 type Binder =
   static member inline Bind(value: 'a list, fn: 'a -> 'b list, [<OptionalArgument>] _mthd: Binder) : 'b list =

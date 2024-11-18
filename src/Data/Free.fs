@@ -1,6 +1,6 @@
-namespace Fable.Effect.Data
+namespace Himanoa.Fable.Effect.Data
 
-open Fable.Effect.Control
+open Himanoa.Fable.Effect.Control
 
 [<NoComparison>]
 type Free<'f, 'r, 'a when 'f :> HKT> =

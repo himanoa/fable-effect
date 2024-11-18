@@ -1,6 +1,6 @@
-module Fable.Effect.Test.Data.Trampoline
+module Himanoa.Fable.Effect.Test.Data.Trampoline
 
-open Fable.Effect.Data
+open Himanoa.Fable.Effect.Data
 open Expect
 open WebTestRunner
 
