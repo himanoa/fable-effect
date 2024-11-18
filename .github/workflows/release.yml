@@ -26,4 +26,6 @@ jobs:
       run: dotnet paket restore
     - name: Bump
       run: pnpm run bump
+    - run: git status
+    - run: git --no-pager log
     - run: git push --tags
